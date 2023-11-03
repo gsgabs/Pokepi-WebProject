@@ -1,9 +1,9 @@
 import './App.css';
-
+import Pokedex from '../pages/Pokedex';
 export default function App() {
   return (
     <>
-      <h1>cachoeira</h1>
+      <Pokedex></Pokedex>
     </>
   );
 } 
