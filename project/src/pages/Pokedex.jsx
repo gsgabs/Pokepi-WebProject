@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import Pokemon from '../components/Pokemon';
 import apFetch from '../api/config';
 
 function Pokedex() {
    
     // Setando post onde vai ser uma lista vazia onde adicionaremos os objetos trazidos pela API via JSON
     const [poke,setPoke]= useState([]);
+    const [id,setId] = useState(0);
     
   
     // Função assincrona para chamada
@@ -19,14 +21,16 @@ function Pokedex() {
     }
 
     useEffect(()=>{
-          getPoke();
+      getPoke();
     },[]);
+
+      setId(id+1);
 
   return (
     <ul>
         {poke.map((pokemon, index) => (
-          <li key={index}>{pokemon.name}
-          <img src={pokemon.url} alt="" />
+          <li key={index}>
+            <Pokemon name={pokemon.name} id={id}/>
           </li>
         ))}
     </ul>
