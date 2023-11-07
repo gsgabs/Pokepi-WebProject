@@ -1,39 +1,53 @@
-import { useState, useEffect } from 'react';
-import Pokemon from '../components/Pokemon';
+import React, { useState, useEffect } from 'react';
 import apFetch from '../api/config';
 
 function Pokedex() {
-   
-    // Setando post onde vai ser uma lista vazia onde adicionaremos os objetos trazidos pela API via JSON
-    const [poke,setPoke]= useState([]);
-    const [id,setId] = useState(0);
-    
+  const [poke, setPoke] = useState([]);
   
-    // Função assincrona para chamada
-    const getPoke = async() => {
+  const getPoke = async () => {
+    try {
+      const response = await apFetch.get("/pokemon");
+      const data = response.data.results;
+      setPoke(data);
+    } catch (error) {
+      console.log("erro!");
+    }
+  }
+
+  useEffect(() => {
+    getPoke();
+  }, []);
+
+  return (
+    <ul>
+      {poke.map((pokemon, index) => (
+        <PokeItem key={index} name={pokemon.name} />
+      ))}
+    </ul>
+  );
+}
+
+function PokeItem({ name }) {
+  const [id, setId] = useState(1);
+
+  useEffect(() => {
+    const fetchPokemonData = async () => {
       try {
-        const response = await apFetch.get("/pokemon");
-        const data = response.data.results;
-        setPoke(data);
+        const response = await apFetch.get(`/pokemon/${name}`);
+        setId(response.data.id);
       } catch (error) {
         console.log("erro!");
       }
     }
 
-    useEffect(()=>{
-      getPoke();
-    },[]);
-
-      setId(id+1);
+    fetchPokemonData();
+  }, [name]);
 
   return (
-    <ul>
-        {poke.map((pokemon, index) => (
-          <li key={index}>
-            <Pokemon name={pokemon.name} id={id}/>
-          </li>
-        ))}
-    </ul>
+    <li>
+      <h1>{name}</h1>
+      <img className="" alt={name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
+    </li>
   );
 }
 

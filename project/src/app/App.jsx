@@ -1,9 +1,11 @@
 import './App.css';
-import Pokedex from '../pages/Pokedex';
+import { Outlet } from 'react-router-dom';
+
 export default function App() {
   return (
     <>
-      <Pokedex></Pokedex>
+      
+      <Outlet/>
     </>
   );
 } 
