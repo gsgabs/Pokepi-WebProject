@@ -1,0 +1,21 @@
+.BarraDenav {
+    height: 7vh;
+    color: crimson;
+    background-color: black;
+    display: flex;
+}
+
+.BarraDenav :hover{
+    color: aqua;
+}
+
+.gerasons {
+    display: flex;
+    flex: 3;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+
+
