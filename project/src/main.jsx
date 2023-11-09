@@ -1,11 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './app/App'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './app/App';
+import './index.css';
 
 // importação do react router dom
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
+
+// paginas do app
 import Pokedex from './pages/Pokedex';
+import Pokemon from './pages/Pokemon';
 
 const rota = createBrowserRouter ([
 
@@ -16,7 +19,11 @@ const rota = createBrowserRouter ([
     children:[{
       path:"/",
       element:<Pokedex/>
-    },]
+    },{
+      path:"/:id",
+      element:<Pokemon/>
+    }
+    ]
   },
 ]);
 

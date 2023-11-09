@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import apFetch from '../api/config';
 
 function Pokedex() {
   const [poke, setPoke] = useState([]);
   
-  const getPoke = async () => {
-    try {
-      const response = await apFetch.get("/pokemon");
-      const data = response.data.results;
-      setPoke(data);
-    } catch (error) {
-      console.log("erro!");
-    }
-  }
-
   useEffect(() => {
+    const getPoke = async () => {
+      try {
+        const response = await apFetch.get("/pokemon-form");
+        const data = response.data.results;
+        setPoke(data);
+      } catch (error) {
+        console.log("erro!");
+      }
+    }
     getPoke();
   }, []);
 
@@ -25,30 +25,33 @@ function Pokedex() {
       ))}
     </ul>
   );
-}
 
-function PokeItem({ name }) {
-  const [id, setId] = useState(1);
-
-  useEffect(() => {
-    const fetchPokemonData = async () => {
-      try {
-        const response = await apFetch.get(`/pokemon/${name}`);
-        setId(response.data.id);
-      } catch (error) {
-        console.log("erro!");
+  function PokeItem({ name }) {
+    const [id, setId] = useState(1);
+  
+    useEffect(() => {
+      const fetchPokemonData = async () => {
+        try {
+          const response = await apFetch.get(`/pokemon-form/${name}`);
+          setId(response.data.id);
+        } catch (error) {
+          console.log("erro!");
+        }
       }
-    }
+  
+      fetchPokemonData();
+    }, [name]);
+  
+    return (
+      <li>
+        <h1>{name}</h1> 
+        <img className="" alt={name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
+        <Link to={`/${name}`}>Details</Link>
+      </li>
+    );
+  }
+  
 
-    fetchPokemonData();
-  }, [name]);
-
-  return (
-    <li>
-      <h1>{name}</h1>
-      <img className="" alt={name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
-    </li>
-  );
 }
 
 export default Pokedex;
