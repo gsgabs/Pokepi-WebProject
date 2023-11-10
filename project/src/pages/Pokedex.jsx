@@ -8,7 +8,7 @@ function Pokedex() {
   useEffect(() => {
     const getPoke = async () => {
       try {
-        const response = await apFetch.get("/pokemon-form");
+        const response = await apFetch.get("/pokemon-form?limit=151");
         const data = response.data.results;
         setPoke(data);
       } catch (error) {

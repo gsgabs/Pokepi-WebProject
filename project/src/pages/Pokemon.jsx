@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apFetch from '../api/config';
 import { useParams } from 'react-router-dom';
+import PokemonList from '../components/PokemonList';
 
 function Pokemon() {
   const { id } = useParams();
@@ -16,10 +17,6 @@ function Pokemon() {
           apFetch.get(`stat`),
         ]);
         setData(pokemonResponse.data);
-
-        // Se necessário, você pode lidar com as informações de status aqui
-        const statusData = statusResponse.data.results;
-        console.log("Dados de status:", statusData);
       } catch (err) {
         setError(err);
       } finally {
@@ -49,10 +46,10 @@ function Pokemon() {
       <img src={sprite} alt={names} />
       <p>{typeNames.join(' | ')}</p>
       <PokeInfo name={names} />
-      <PokeStatus />
+      <PokeStatusNum name={names}/>
     </div>
   );
-}
+
 
 function PokeInfo({ name }) {
   const [pokemonAp, setPokemonAp] = useState({});
@@ -95,43 +92,38 @@ function PokeInfo({ name }) {
   );
 }
 
-function PokeStatus() {
-  const [nameStatus, setNameStatus] = useState([]);
+function PokeStatusNum({name}) {
+  const [statusNum, setStatusNum] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchPokeStatus = async () => {
       try {
-        const res = await apFetch.get(`stat`);
-        setNameStatus(res.data.results);
+        const res = await apFetch.get(`pokemon/${name}`);        
+        setStatusNum(res.data.stats);
       } catch (err) {
         setError(err);
       } finally {
         setLoading(false);
       }
     };
-
     fetchPokeStatus();
   }, []);
-
+  
   if (loading) {
     return <h3>Carregando informações de status...</h3>;
   }
-
+  
   if (error) {
     return <h1>Error: {error.message}</h1>;
   }
 
   return (
     <div>
-      <ul>
-        {nameStatus.map((statu, index) => (
-          <li key={index}>{statu.name}:</li>
-        ))}
-      </ul>
+        <PokemonList data={statusNum}/>
     </div>
   );
 }
-
+}
 export default Pokemon;
