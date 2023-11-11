@@ -1,12 +1,13 @@
 import React from 'react';
 
 function PokemonList({ data }) {
+
+  console.log(data);
+  
   return (
     <table>
       <thead>
         <tr>
-          <th>Base Stat</th>
-          <th>Effort</th>
         </tr>
       </thead>
       <tbody>

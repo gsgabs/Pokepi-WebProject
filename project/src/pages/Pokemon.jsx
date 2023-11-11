@@ -1,3 +1,4 @@
+// Pokemon.jsx
 import React, { useState, useEffect } from 'react';
 import apFetch from '../api/config';
 import { useParams } from 'react-router-dom';
@@ -11,12 +12,16 @@ function Pokemon() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const endpoints = [`pokemon-form/${id}`, `pokemon/${id}`];
       try {
-        const [pokemonResponse, statusResponse] = await Promise.all([
-          apFetch.get(`pokemon-form/${id}`),
-          apFetch.get(`stat`),
-        ]);
-        setData(pokemonResponse.data);
+        const [pokemonResponse, additionalInfoResponse] = await Promise.all(
+          endpoints.map(endpoint => apFetch.get(endpoint))
+        );
+        setData({
+          pokemon: pokemonResponse.data,
+          additionalInfo: additionalInfoResponse.data,
+          stats: additionalInfoResponse.data.stats,
+        });
       } catch (err) {
         setError(err);
       } finally {
@@ -35,95 +40,25 @@ function Pokemon() {
     return <h1>Error: {error.message}</h1>;
   }
 
-  const names = data.name;
-  const types = data.types;
-  const sprite = data.sprites.front_default;
-  const typeNames = types.map((typeData) => typeData.type.name);
+  const { name, sprites, types } = data.pokemon || {};
+  const { height, weight, id: pokemonId } = data.additionalInfo || {};
+  const typeNames = types ? types.map((typeData) => typeData.type.name) : [];
 
   return (
     <div>
-      <p>{names}</p>
-      <img src={sprite} alt={names} />
+      <p>{name}</p>
+      <img src={sprites ? sprites.front_default : ''} alt={name} />
       <p>{typeNames.join(' | ')}</p>
-      <PokeInfo name={names} />
-      <PokeStatusNum name={names}/>
-    </div>
-  );
-
-
-function PokeInfo({ name }) {
-  const [pokemonAp, setPokemonAp] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchPokeAp = async () => {
-      try {
-        const res = await apFetch.get(`pokemon/${name}`);
-        setPokemonAp(res.data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPokeAp();
-  }, [name]);
-
-  if (loading) {
-    return <h3>Carregando informações adicionais...</h3>;
-  }
-
-  if (error) {
-    return <h1>Error: {error.message}</h1>;
-  }
-
-  const height = pokemonAp.height;
-  const weight = pokemonAp.weight;
-  const number = ("0000" + pokemonAp.id).slice(-4);
-
-  return (
-    <div>
-      <p>National №: #{number}</p>
-      <p>Tamanho: {height}</p>
-      <p>Peso: {weight}</p>
+      <div>
+        <p>National №: #{("0000" + pokemonId).slice(-4)}</p>
+        <p>Tamanho: {height}</p>
+        <p>Peso: {weight}</p>
+      </div>
+      <div>
+        <PokemonList data={data.stats || []} />
+      </div>
     </div>
   );
 }
 
-function PokeStatusNum({name}) {
-  const [statusNum, setStatusNum] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchPokeStatus = async () => {
-      try {
-        const res = await apFetch.get(`pokemon/${name}`);        
-        setStatusNum(res.data.stats);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPokeStatus();
-  }, []);
-  
-  if (loading) {
-    return <h3>Carregando informações de status...</h3>;
-  }
-  
-  if (error) {
-    return <h1>Error: {error.message}</h1>;
-  }
-
-  return (
-    <div>
-        <PokemonList data={statusNum}/>
-    </div>
-  );
-}
-}
 export default Pokemon;
