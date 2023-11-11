@@ -1,9 +1,6 @@
 import React from 'react';
 
 function PokemonList({ data }) {
-
-  console.log(data);
-  
   return (
     <table>
       <thead>
