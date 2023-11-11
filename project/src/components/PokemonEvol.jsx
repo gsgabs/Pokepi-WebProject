@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import apFetch from "../api/config";
+import { Link } from "react-router-dom";
 
 function PokemonEvol({ id }) {
   const [evolution, setEvolution] = useState([]);
@@ -72,7 +73,7 @@ function PokemonEvol({ id }) {
         {evolutionData.map((data) => (
           <li key={data.id}>
             <p>{data.name}</p>
-            <img src={data.sprites.front_default} alt={data.name} />
+            <Link to={`/${data.name}`}><img src={data.sprites.front_default} alt={data.name} /></Link>
           </li>
         ))}
       </ul>
