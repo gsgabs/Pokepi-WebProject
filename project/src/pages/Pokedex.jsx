@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apFetch from '../api/config';
+import './Pokedex.css';
 
 function Pokedex() {
   const [poke, setPoke] = useState([]);
@@ -44,10 +45,12 @@ function PokeItem({ name }) {
   }, [name]);
 
   return (
-    <li>
-      <h1>{name}</h1>
-      <img className="" alt={name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
-    </li>
+    <div id='box-pokemon'>
+      <li>
+        <h1>{name}</h1>
+        <img className="poketure" alt={name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
+      </li>
+    </div>
   );
 }
 
