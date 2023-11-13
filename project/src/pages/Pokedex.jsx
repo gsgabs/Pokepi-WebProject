@@ -1,6 +1,7 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import apFetch from '../api/config';
+import './Pokedex.css';
 
 function Pokedex() {
   const [poke, setPoke] = useState([]);

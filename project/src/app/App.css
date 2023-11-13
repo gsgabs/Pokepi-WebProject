@@ -1,20 +1,28 @@
-.BarraDenav {
-    height: 7vh;
-    color: crimson;
-    background-color: black;
-    display: flex;
-}
-
 .BarraDenav :hover{
     color: aqua;
 }
 
-.gerasons {
+/* .gerasons {
     display: flex;
     flex: 3;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-around;
+} */
+
+.corpo {
+    background-color: darkblue;
+    width: 1500px;
+}
+
+nav {
+    background-color: brown;
+    height: 100px;
+    width: 100%;
+}
+
+ul{
+    list-style-type: none;
 }
 
 
