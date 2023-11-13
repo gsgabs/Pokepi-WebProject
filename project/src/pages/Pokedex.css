@@ -15,3 +15,8 @@
     height: 160px;
     margin-top: 20px;
 }
+
+.tipo {
+    display: inline-block;
+    width: 50%;
+}

@@ -11,14 +11,23 @@
 } */
 
 .corpo {
-    background-color: darkblue;
-    width: 1500px;
+    background-color: #fff;
+    width: 100%;
 }
 
 nav {
     background-color: brown;
-    height: 100px;
+    height: 80px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav h1 {
+    color: #fff;
+    text-align: center;
+    font-size: xx-large;
 }
 
 ul{

@@ -1,5 +1,5 @@
 // Pokemon.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import apFetch from '../api/config';
 import { useParams } from 'react-router-dom';
 
