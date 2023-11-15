@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import apFetch from '../api/config';
 import { useParams } from 'react-router-dom';
 
+//css
+import './Pokemon.css';
+
 // components
 import PokemonList from '../components/PokemonList';
 import PokemonEvol from '../components/PokemonEvol'
@@ -50,20 +53,22 @@ function Pokemon() {
   const especiesNum = data.especies.evolution_chain.url.replace("https://pokeapi.co/api/v2/evolution-chain/","")
 
   return (
-    <div>
-      <p>{name}</p>
-      <img src={sprites ? sprites.front_default : ''} alt={name} />
-      <p>{typeNames.join(' | ')}</p>
+    <div id='pokekon'>
       <div>
-        <p>National №: #{("0000" + pokemonId).slice(-4)}</p>
-        <p>Tamanho: {height}</p>
-        <p>Peso: {weight}</p>
-      </div>
-      <div>
-        <PokemonList data={data.stats || []} />
-      </div>
-      <div>
-        <PokemonEvol id={especiesNum}/>
+        <div id='apresent'>
+          <h2>{name}</h2>
+          <img src={sprites ? sprites.front_default : ''} alt={name} />
+          <p>{typeNames.join(' | ')}</p>
+        </div>
+        <div id='dados'>
+          <p>National №: #{("0000" + pokemonId).slice(-4)}</p>
+          <p>Tamanho: {height}</p>
+          <p>Peso: {weight}</p>
+          <PokemonList data={data.stats || []} />
+        </div>
+        <div id='evolute'>
+          <PokemonEvol id={especiesNum}/>
+        </div>
       </div>
     </div>
   );
