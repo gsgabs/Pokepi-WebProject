@@ -1,8 +1,8 @@
 #box-pokemon {
-    background-color: #EC7063;
+    background-color: #fff;
     height: 250px;
     width: 250px;
-    border: 4px solid black;
+    /* border: 4px solid black; */
     border-radius: 20px;
     margin: 10px;
     text-align: center;
