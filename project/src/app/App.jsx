@@ -5,10 +5,7 @@ export default function App() {
   return (
     <>  
       <div className='corpo'>
-        <nav><h1>Pokepi</h1></nav>
-        <ul>
-          <Outlet/>
-        </ul>
+        <Outlet/>
     </div>
     </>
   );

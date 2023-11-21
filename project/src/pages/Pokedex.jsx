@@ -31,11 +31,14 @@ function Pokedex() {
   }
 
   return (
-    <ul>
-      {poke.map((pokemon, index) => (
-        <PokeItem key={index} {...pokemon} />
-      ))}
-    </ul>
+    <div id='pokecontainer'>
+      <div className='pokenav'>Pokepi</div>
+      <ul>
+        {poke.map((pokemon, index) => (
+          <PokeItem key={index} {...pokemon} />
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -91,11 +94,12 @@ function PokeItem({ name, id, types }) {
   return (
     <div id='box-pokemon'>
       <li >
-        <h1>{name}</h1>
-        <p className='tipo' style={{ backgroundColor }}>{types.map((typeData) => typeData.type.name).join(' | ')}</p>
         <Link to={`/${name}`}>
           <img className="poketure" alt={name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
         </Link>
+        <h2>{name}</h2>
+        <p className='tipo' style={{ backgroundColor }}>{types.map((typeData) => typeData.type.name).join(' | ')}</p>
+        
       </li>
     </div>
   );

@@ -1,5 +1,32 @@
-#box-pokemon {
+#pokecontainer {
+    background-color: rgb(135, 135, 135);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokenav {
+    background-color: brown;
+    color: #fff;
+    height: 80px;
+    width: 100%;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pokecontainer ul {
     background-color: #fff;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 275px;
+}
+
+#box-pokemon {
+    background-color: #F2F2F2;
     height: 250px;
     width: 250px;
     /* border: 4px solid black; */
