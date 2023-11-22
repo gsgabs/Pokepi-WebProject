@@ -6,6 +6,7 @@ import './Pokedex.css';
 function Pokedex() {
   const [poke, setPoke] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [dataPoke, setDataPoke] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +16,7 @@ function Pokedex() {
         const requests = data.map(pokemon => apFetch.get(`/pokemon-form/${pokemon.name}`));
         const responses = await Promise.all(requests);
         const pokemonData = responses.map(response => response.data);
+        setDataPoke(response.data.id);
         setPoke(pokemonData);
       } catch (error) {
         console.log("Erro:", error);
@@ -34,6 +36,7 @@ function Pokedex() {
     <div id='pokecontainer'>
       <div className='pokenav'>Pokepi</div>
       <ul>
+        {dataPoke}
         {poke.map((pokemon, index) => (
           <PokeItem key={index} {...pokemon} />
         ))}
