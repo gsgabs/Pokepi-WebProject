@@ -1,5 +1,5 @@
 #pokecontainer {
-    background-color: rgb(135, 135, 135);
+    background-color: #2e3235;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -19,25 +19,27 @@
 }
 
 #pokecontainer ul {
-    background-color: #fff;
+    background-color: #2e3235;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-auto-rows: 275px;
 }
 
 #box-pokemon {
-    background-color: #F2F2F2;
+    background-color: #2e3235;
     height: 250px;
     width: 250px;
-    /* border: 4px solid black; */
+    border: 1px solid #4C555C;
     border-radius: 20px;
     margin: 10px;
     text-align: center;
     display: inline-block;
 }
 
-#box-pokemon h1 {
+#box-pokemon h2 {
     text-transform: capitalize;
+    color: #fff;
+    font-weight: 200;
 }
 
 .poketure {
@@ -48,9 +50,11 @@
 }
 
 .tipo {
+    font-size: smaller;
+    font-weight: 100;
     display: inline-block;
-    width: 50%;
+    width:fit-content;
+    padding: 3px 10px;
     color: #fff;
-    border: 2px solid black;
     border-radius: 10px;
 }

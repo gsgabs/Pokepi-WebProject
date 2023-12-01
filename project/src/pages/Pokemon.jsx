@@ -67,6 +67,7 @@ function Pokemon() {
           <PokemonList data={data.stats || []} />
         </div>
         <div id='evolute'>
+          <h3>Evoluções</h3>
           <PokemonEvol id={especiesNum}/>
         </div>
       </div>

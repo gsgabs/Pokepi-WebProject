@@ -53,7 +53,7 @@ function PokeItem({ name, id, types }) {
       case 'water':
         return 'blue';
       case 'bug':
-        return 'lime';
+        return '#98d048';
       case 'rock':
         return '#a38c21';
       case 'poison':
@@ -65,7 +65,7 @@ function PokeItem({ name, id, types }) {
       case 'ground':
         return '#ab9842';
       case 'fighting':
-        return '#d56723';
+        return '#bd3c5a';
       case 'normal':
         return '#a4acaf';
       case 'ice':
@@ -73,7 +73,7 @@ function PokeItem({ name, id, types }) {
       case 'psychic':
         return '#f366b9';
       case 'electric':
-        return '#eed535';
+        return '#f3ae33';
       case 'dark':
         return '#707070';
       case 'flying':
