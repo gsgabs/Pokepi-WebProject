@@ -23,7 +23,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-auto-rows: 275px;
+    gap: 9px;
 }
+
+
 
 #box-pokemon {
     background-color: #2e3235;
