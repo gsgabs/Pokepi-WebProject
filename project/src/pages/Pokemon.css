@@ -19,15 +19,19 @@
 
 #apresent {
     grid-area: 1 / 1 / 4 / 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #apresent img {
-    height: 400px;
+    height: 72%;
+    margin: 10px 50px;
 }
 
 #apresent h2, p {
     text-transform: capitalize;
-    text-align: center;
 }
 
 #apresent h2 {
@@ -42,7 +46,7 @@
 } 
 
 #evolute {
-    grid-area: -3 / 1 / -1 / 4;
+    grid-area: -3 / 2 / -1 / 5;
     display: flex;
     flex-direction: column;
 }
