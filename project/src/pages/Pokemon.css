@@ -1,0 +1,79 @@
+#pokekon {
+    width: 100vw;
+}
+
+#pokekon > div{
+    height: 100vh;
+    background-color: #fff;
+    padding: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: space-evenly;
+}
+
+/* #apresent {
+    margin-right: 150px;
+} */
+
+#apresent img {
+    height: 400px;
+}
+
+#apresent h2, p {
+    color:black;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+#apresent h2 {
+    margin-top: 10px;
+    font-size: 2rem;
+}
+
+#dados {
+    font-size: larger;
+    padding: 30px;
+} 
+
+
+
+
+
+@media (max-width: 600px){
+    #pokekon {
+        width: 100vw;
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        vertical-align: middle;
+    } 
+    
+    #pokekon > div{
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        vertical-align: middle;
+    }
+    
+    /* #pokekon > div {
+        border-right: 3px solid black;
+        border-left: 3px solid black;
+    } */
+    
+    
+    #apresent h2 {
+        margin-top: 20px;
+        font-size: 4rem;
+    }
+
+    #dados {
+        font-size: xx-large;
+        padding: 30px;
+    } 
+    
+    
+}

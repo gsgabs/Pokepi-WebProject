@@ -5,10 +5,7 @@ export default function App() {
   return (
     <>  
       <div className='corpo'>
-        <nav></nav>
-        <ul>
-          <Outlet/>
-        </ul>
+        <Outlet/>
     </div>
     </>
   );
