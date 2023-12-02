@@ -7,18 +7,22 @@
     background-color: #2e3235;
     color: #fff;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    /* padding: 3rem;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+}
+
+.pokenav {
+    background-color: brown;
+    color: #fff;
+    font-size: 2.5rem;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    vertical-align: middle;
-    justify-content: space-evenly; */
+    grid-area: 1 / 1 / 3 / -1;
 }
 
 #apresent {
-    grid-area: 1 / 1 / 4 / 4;
+    grid-area: 3 / 2 / 11 / 9;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,8 +30,7 @@
 }
 
 #apresent img {
-    height: 72%;
-    margin: 10px 50px;
+    height: 82%;
 }
 
 #apresent h2, p {
@@ -40,13 +43,21 @@
 }
 
 #dados {
-    grid-area: 2 / 4 / 5 / 6;
-    font-size: larger;
+    grid-area: 4 / -7 / -5 / -3;
+    font-size: 1.75rem;
     padding: 30px;
 } 
 
+#dados p {
+    margin: 10px 0px;
+}
+
 #evolute {
-    grid-area: -3 / 2 / -1 / 5;
+    grid-area: -6 / 2 / -3 / 9;
     display: flex;
     flex-direction: column;
+}
+
+#pokemondata {
+    text-transform: uppercase;
 }

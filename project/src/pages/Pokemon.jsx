@@ -55,16 +55,17 @@ function Pokemon() {
   return (
     <div id='pokekon'>
       <div>
+        <div className='pokenav'>Pokepi</div>
         <div id='apresent'>
           <h2>{name}</h2>
-          <img src={sprites ? sprites.front_default : ''} alt={name} />
           <p>{typeNames.join(' | ')}</p>
+          <img src={sprites ? sprites.front_default : ''} alt={name} />
         </div>
         <div id='dados'>
           <p>National №: #{("0000" + pokemonId).slice(-4)}</p>
           <p>Tamanho: {height}</p>
           <p>Peso: {weight}</p>
-          <PokemonList data={data.stats || []} />
+          <PokemonList id='pokemondata' data={data.stats || []} />
         </div>
         <div id='evolute'>
           <h3>Evoluções</h3>
