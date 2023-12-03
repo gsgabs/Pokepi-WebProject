@@ -6,7 +6,8 @@ import './Pokedex.css';
 function Pokedex() {
   const [poke, setPoke] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [dataPoke, setDataPoke] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pokemonsPerPage] = useState(8);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +17,6 @@ function Pokedex() {
         const requests = data.map(pokemon => apFetch.get(`/pokemon-form/${pokemon.name}`));
         const responses = await Promise.all(requests);
         const pokemonData = responses.map(response => response.data);
-        setDataPoke(response.data.id);
         setPoke(pokemonData);
       } catch (error) {
         console.log("Erro:", error);
@@ -32,17 +32,41 @@ function Pokedex() {
     return <div>Loading...</div>;
   }
 
-  return (
-    <div id='pokecontainer'>
-      <div className='pokenav'>Pokepi</div>
-      <ul>
-        {dataPoke}
-        {poke.map((pokemon, index) => (
-          <PokeItem key={index} {...pokemon} />
-        ))}
-      </ul>
+  // Lógica para a paginação
+  const indexOfLastPokemon = currentPage * pokemonsPerPage;
+  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+  const currentPokemons = poke.slice(indexOfFirstPokemon, indexOfLastPokemon);
+
+  // Função para alterar a página
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+ // ... (restante do código)
+
+// ... (restante do código)
+
+return (
+  <div id='pokecontainer'>
+    <div className='pokenav'>Pokepi</div>
+    <ul>
+      {currentPokemons.map((pokemon, index) => (
+        <PokeItem key={index} {...pokemon} />
+      ))}
+    </ul>
+    {/* Controles de página */}
+    <div className="pagination">
+      {Array.from({ length: Math.ceil(poke.length / pokemonsPerPage) }, (_, index) => index + 1).map((number) => (
+        <button
+          key={number}
+          onClick={() => paginate(number)}
+          className={currentPage === number ? 'active' : ''}
+        >
+          {number}
+        </button>
+      ))}
     </div>
-  );
+  </div>
+);
+
 }
 
 function PokeItem({ name, id, types }) {
@@ -56,7 +80,7 @@ function PokeItem({ name, id, types }) {
       case 'water':
         return 'blue';
       case 'bug':
-        return '#98d048';
+        return 'lime';
       case 'rock':
         return '#a38c21';
       case 'poison':
@@ -68,7 +92,7 @@ function PokeItem({ name, id, types }) {
       case 'ground':
         return '#ab9842';
       case 'fighting':
-        return '#bd3c5a';
+        return '#d56723';
       case 'normal':
         return '#a4acaf';
       case 'ice':
@@ -76,7 +100,7 @@ function PokeItem({ name, id, types }) {
       case 'psychic':
         return '#f366b9';
       case 'electric':
-        return '#f3ae33';
+        return '#eed535';
       case 'dark':
         return '#707070';
       case 'flying':
@@ -94,15 +118,22 @@ function PokeItem({ name, id, types }) {
   // Obtém a cor do primeiro tipo do Pokémon (pode ser ajustado conforme necessário)
   const backgroundColor = getTypeColor(types[0].type.name);
 
+  const typeBoxes = types.map((typeData, index) => (
+    <div key={index} className='tipobox' style={{ backgroundColor: getTypeColor(typeData.type.name) }}>
+      {typeData.type.name}
+    </div>
+  ));
+
   return (
     <div id='box-pokemon'>
-      <li >
+      <li>
         <Link to={`/${name}`}>
           <img className="poketure" alt={name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
         </Link>
         <h2>{name}</h2>
-        <p className='tipo' style={{ backgroundColor }}>{types.map((typeData) => typeData.type.name).join(' | ')}</p>
-        
+        <div className='tipo'>
+          {typeBoxes}
+        </div>
       </li>
     </div>
   );
