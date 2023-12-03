@@ -61,3 +61,57 @@
     color: #fff;
     border-radius: 10px;
 }
+
+.tipobox {
+    font-size: smaller;
+    font-weight: 100;
+    display: inline-block;
+    width:fit-content;
+    padding: 3px 10px;
+    color: #fff;
+    border-radius: 10px;
+}
+
+/* Adicione estilos para os botões de página */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: #ccc;
+    border: 1px solid #666;
+    color: #333;
+    padding: 8px 12px;
+    margin: 0 4px;
+    cursor: pointer;
+  }
+  
+  .pagination button.active {
+    background-color: #555;
+    color: #fff;
+  }
+  
+  /* Adicione estilos para o botão anterior/próximo se desejar */
+  .pagination .prev-next {
+    margin: 0 4px;
+  }
+  
+  .pagination .prev-next button {
+    background-color: #ccc;
+    border: 1px solid #666;
+    color: #333;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  /* Estilo para o botão anterior/próximo quando desativado */
+  .pagination .prev-next button:disabled {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    color: #aaa;
+    cursor: not-allowed;
+  }
+  
+ 
