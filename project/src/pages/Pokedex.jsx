@@ -6,8 +6,20 @@ import './Pokedex.css';
 function Pokedex() {
   const [poke, setPoke] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pokemonsPerPage] = useState(8);
+  const [currentPage, setCurrentPage] = useState(0);
+  const pokemonsPerPage = 8;
+  const [search, setSearch] = useState('');
+  const [filterPokemons, setFilterPokemons] = useState([]);
+
+  function searchPokemons() {
+    if(search !== ''){
+      const filteredPokemons = poke.filter(pokemon => pokemon.name.toLowerCase().includes(search.toLowerCase()))
+      setFilterPokemons(filteredPokemons)
+    }
+    else{
+      setFilterPokemons(poke)
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,6 +30,7 @@ function Pokedex() {
         const responses = await Promise.all(requests);
         const pokemonData = responses.map(response => response.data);
         setPoke(pokemonData);
+        setFilterPokemons(pokemonData)
       } catch (error) {
         console.log("Erro:", error);
       } finally {
@@ -28,45 +41,62 @@ function Pokedex() {
     fetchData();
   }, []);
 
+useEffect(() => {
+  searchPokemons()
+},[search]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   // Lógica para a paginação
-  const indexOfLastPokemon = currentPage * pokemonsPerPage;
+  const indexOfLastPokemon = (currentPage + 1) * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-  const currentPokemons = poke.slice(indexOfFirstPokemon, indexOfLastPokemon);
+  const currentPokemons = filterPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+  const totalPages = Math.ceil(filterPokemons.length / pokemonsPerPage);
+
+  // Função para renderizar os botões de paginação
+  const renderPaginationButtons = () => {
+    const buttons = [];
+
+    for (let i = 0; i < totalPages; i++) {
+      if(i === currentPage || i === currentPage - 1 || i === currentPage + 1 || i === totalPages){
+        buttons.push(
+          <button
+            key={i}
+            onClick={() => setCurrentPage(i)}
+            className={currentPage === i ? 'active' : ''}
+          >
+            {i + 1}
+          </button>
+        );
+      }
+      else if (buttons[buttons.length - 1] !== '...'){
+        buttons.push('...')
+      }
+    }
+
+    return buttons;
+  };
 
   // Função para alterar a página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
- // ... (restante do código)
-
-// ... (restante do código)
-
-return (
-  <div id='pokecontainer'>
-    <div className='pokenav'>Pokepi</div>
-    <ul>
-      {currentPokemons.map((pokemon, index) => (
-        <PokeItem key={index} {...pokemon} />
-      ))}
-    </ul>
-    {/* Controles de página */}
-    <div className="pagination">
-      {Array.from({ length: Math.ceil(poke.length / pokemonsPerPage) }, (_, index) => index + 1).map((number) => (
-        <button
-          key={number}
-          onClick={() => paginate(number)}
-          className={currentPage === number ? 'active' : ''}
-        >
-          {number}
-        </button>
-      ))}
+  return (
+    <div id='pokecontainer'>
+      <div className='pokenav'>Pokepi</div>
+      <div className='inputbox'><input type="text" placeholder='Faça sua pesquisa' value={search} onChange={e => setSearch(e.target.value)}/></div>
+      <ul>
+        {currentPokemons.length === 0 ? 'Carregando...' : currentPokemons.map((pokemon, index) => (
+          <PokeItem key={index} {...pokemon} />
+        ))}
+      </ul>
+      {/* Controles de página */}
+      <div className="pagination">
+        {renderPaginationButtons()}
+      </div>
     </div>
-  </div>
-);
-
+  );
 }
 
 function PokeItem({ name, id, types }) {
@@ -74,13 +104,13 @@ function PokeItem({ name, id, types }) {
   const getTypeColor = (type) => {
     switch (type) {
       case 'grass':
-        return 'green';
+        return '#9bcc50 ';
       case 'fire':
-        return 'red';
+        return '#fd7d24';
       case 'water':
-        return 'blue';
+        return '#4592c4';
       case 'bug':
-        return 'lime';
+        return '#729f3f';
       case 'rock':
         return '#a38c21';
       case 'poison':
