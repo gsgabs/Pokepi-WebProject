@@ -1,6 +1,9 @@
 // StatBar.jsx
 import React from 'react';
 
+//css
+import './StatBar.css';
+
 const StatBar = ({ label, value, max }) => {
   const percentage = (value / max) * 100;
 

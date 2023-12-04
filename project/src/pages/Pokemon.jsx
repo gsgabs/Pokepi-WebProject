@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import apFetch from '../api/config';
 import { useParams } from 'react-router-dom';
+import pokepi from '../assets/Pokepi.png';
 
 // css
 import './Pokemon.css';
@@ -99,7 +100,9 @@ function Pokemon() {
   return (
     <div id='pokekon'>
       <div>
-        <div className='pokenav'>Pokepi</div>
+        <div className='pokenav'>
+          <img src={pokepi} alt='Pokepi' />
+        </div>
         <div id='apresent'>
           <h2>{name}</h2>
           <div id='types'>
