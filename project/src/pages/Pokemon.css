@@ -90,7 +90,30 @@
   
   .stat-fill {
     height: 20px; /* Altura da barra, ajuste conforme necessário */
-    background-color: #4caf50; /* Cor de fundo da barra, ajuste conforme necessário */
+    border-radius: 10px;
+    background-color: #9aff00; /* Cor de fundo da barra, ajuste conforme necessário */
     margin-left: 50px;
   }
   
+
+@media screen and (max-width: 430px) {
+    #pokekon > div {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #apresent,
+    #dados,
+    #evolute {
+        grid-area: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #evolute {
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+}
