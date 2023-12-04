@@ -46,7 +46,7 @@ useEffect(() => {
 },[search]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='loading'>Loading...</div>;
   }
 
   // Lógica para a paginação
@@ -85,8 +85,11 @@ useEffect(() => {
   return (
     <div id='pokecontainer'>
       <div className='pokenav'>Pokepi</div>
-      <div className='inputbox'><input type="text" placeholder='Faça sua pesquisa' value={search} onChange={e => setSearch(e.target.value)}/></div>
-      <ul>
+      <div className='inputbox'>
+        <span class="material-symbols-outlined">search</span>
+        <input type="text" placeholder='Faça sua pesquisa' value={search} onChange={e => setSearch(e.target.value)}/>
+      </div>
+      <ul className='loading'>
         {currentPokemons.length === 0 ? 'Carregando...' : currentPokemons.map((pokemon, index) => (
           <PokeItem key={index} {...pokemon} />
         ))}
