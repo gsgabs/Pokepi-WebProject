@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import apFetch from '../api/config';
 import './Pokedex.css';
+import pokepi from '../assets/Pokepi.png';
 
 function Pokedex() {
   const [poke, setPoke] = useState([]);
@@ -84,7 +85,9 @@ useEffect(() => {
 
   return (
     <div id='pokecontainer'>
-      <div className='pokenav'>Pokepi</div>
+      <div className='pokenav'>
+        <img src={pokepi} alt='Pokepi' />
+      </div>
       <div className='inputbox'>
         <span class="material-symbols-outlined">search</span>
         <input type="text" placeholder='Faça sua pesquisa' value={search} onChange={e => setSearch(e.target.value)}/>
@@ -160,10 +163,10 @@ function PokeItem({ name, id, types }) {
   return (
     <div id='box-pokemon'>
       <li>
+        <h2>{name}</h2>
         <Link to={`/${name}`}>
           <img className="poketure" alt={name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
         </Link>
-        <h2>{name}</h2>
         <div className='tipo'>
           {typeBoxes}
         </div>
