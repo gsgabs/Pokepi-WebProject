@@ -61,3 +61,33 @@
 #pokemondata {
     text-transform: uppercase;
 }
+
+
+
+.typebox {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 4px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  
+.stat-bar {
+    display: flex;
+    align-items:center;
+  }
+  
+  .stat-label {
+    margin-right: 8px;
+    width: 80px; /* Largura do rótulo, ajuste conforme necessário */
+  }
+  
+  .stat-fill {
+    height: 20px; /* Altura da barra, ajuste conforme necessário */
+    background-color: #4caf50; /* Cor de fundo da barra, ajuste conforme necessário */
+    margin-left: 50px;
+  }
+  

@@ -84,7 +84,9 @@ useEffect(() => {
 
   return (
     <div id='pokecontainer'>
-      <div className='pokenav'>Pokepi</div>
+      <div className='pokenav'>
+  <img src=' ' alt='Pokepi' />
+</div>
       <div className='inputbox'>
         <span class="material-symbols-outlined">search</span>
         <input type="text" placeholder='Faça sua pesquisa' value={search} onChange={e => setSearch(e.target.value)}/>
